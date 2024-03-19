@@ -3,7 +3,7 @@ import sys
 
 def clone_repo(target_dir=None):
     """
-    Clones the pymdp repository into the specified target directory.
+    Clones the infer-actively/pymdp repository into the specified target directory.
     If no target directory is specified, it clones into the current directory.
     
     Parameters:
