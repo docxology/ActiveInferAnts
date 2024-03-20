@@ -11,11 +11,11 @@ Our mission with ActiveInferAnts is to offer a robust, scalable platform that en
 - Includes comprehensive ant agent models equipped with sensory inputs, motor functions, and mechanisms for learning and adaptation (at the nestmate & colony levels).
 - Offers detailed modeling of niches and environments for realistic nested simulations.
 - Enables analysis of emergent colony behaviors, including foraging, trail formation, and task allocation.
-- Provides validation tools against empirical data and facilitates mapping simulations to real-world ant species.
+- Provides validation tools and utilities for empirical data, facilitating mapping simulations to real-world ant species and back.
 
 ## Getting Started
 
-To dive into the world of ActiveInferAnts:
+To dive into the world of Active InferAnts:
 
 1. Clone the repository to your local machine.
 2. Follow the instructions to install all necessary dependencies.
