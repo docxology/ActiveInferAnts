@@ -8,8 +8,8 @@ def clone_repo(git_url: str, target_dir: str) -> None:
     Clones a single GitHub repository into the specified target directory.
     
     Parameters:
-    git_url (str): The GitHub repository URL to clone.
-    target_dir (str): The directory to clone the repository into.
+    - git_url (str): The GitHub repository URL to clone.
+    - target_dir (str): The directory to clone the repository into.
     """
     repo_name = git_url.split('/')[-1]  # Extracts repo name from URL
     full_path = os.path.join(target_dir, repo_name)
@@ -27,8 +27,8 @@ def clone_repos(repo_urls: Union[List[str], Dict[str, str]], target_dir: str = "
     If no target directory is specified, it clones into the 'repos/' directory.
     
     Parameters:
-    repo_urls (Union[List[str], Dict[str, str]]): A list or dictionary of GitHub repository URLs to clone.
-    target_dir (str, optional): The directory to clone the repositories into.
+    - repo_urls (Union[List[str], Dict[str, str]]): A list or dictionary of GitHub repository URLs to clone.
+    - target_dir (str, optional): The directory to clone the repositories into.
     """
     if not os.path.exists(target_dir):
         os.makedirs(target_dir)
@@ -54,7 +54,12 @@ if __name__ == "__main__":
             "https://github.com/4dsolutions/Curriculum_Development"
         ],
         "Ants": [
-            ,
+            "https://github.com/Social-Insect-Genomics/"
+            "https://github.com/johnssproul/Insect_REs",
+            "https://github.com/pbfrandsen/insect_genome_assemblies",
+            "https://github.com/PeterMulhair/DToL_insects",
+            "https://github.com/fohebert/GenomeAnnotation",
+            "https://github.com/guillemylla/Crickets_Genome_Annotation",
         ]
     }
     target_dir = input("Enter the target directory (default is 'repos/'): ").strip() or "repos/"

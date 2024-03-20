@@ -21,18 +21,16 @@ SIMULATION_SETTINGS = {
     },
 }
 
-
-
 # Enhanced Active Inference configuration parameters for advanced pre-rendering and contextualization in shared intelligence ecosystems
 ACTIVE_INFERENCE_CONFIG = {
     'ENABLED': True,  # Flag to enable/disable active inference mechanisms
-    'INFERENCE_MODELS': ['variational', 'predictive_coding', 'bayesian_filtering'],  # Updated models of active inference
+    'INFERENCE_MODELS': ['variational', 'predictive_coding', 'bayesian_filtering', 'deep_active_inference', 'ensemble_methods'],
     'EXPECTATION_FREE_ENERGY': True,  # Enables calculation of expected free energy for decision making
-    'PLANNING_HORIZON': 15,  # Extended depth of future state planning
+    'PLANNING_HORIZON': {'TYPE': 'adaptive', 'BASE_VALUE': 15, 'ADAPTATION_STRATEGY': 'contextual_complexity'},
     'TIME_RESOLUTION': 'continuous',  # Updated to continuous for more granular temporal resolution
     'PRECISION_WEIGHTING': {
-        'PERCEPTION': 0.8,  # Precision weighting for perceptual inference
-        'ACTION': 0.2,  # Precision weighting for action selection
+        'PERCEPTION': {'BASE': 0.8, 'ADAPTIVE': True},
+        'ACTION': {'BASE': 0.2, 'ADAPTIVE': True},
     },
     'GENERALIZATION_DEPTH': 5,  # Increased depth of abstraction layers for inference generalization
     'ITERATION_LIMIT': 20,  # Increased cap on the number of iterations in the active inference cycle
@@ -44,9 +42,9 @@ ACTIVE_INFERENCE_CONFIG = {
     },
     'CONTEXT_AWARENESS': {
         'ENABLED': True,  # Maintains context awareness
-        'CONTEXT_TYPES': ['environmental', 'social', 'temporal', 'emotional'],  # Extended types of contexts to be aware of
-        'DYNAMIC_ADJUSTMENT': True,  # Maintains dynamic adjustment of inference based on context changes
-        'CONTEXT_INTEGRATION': 'multimodal',  # Specifies the integration strategy for multiple contexts
+        'CONTEXT_TYPES': ['environmental', 'social', 'temporal', 'emotional', 'predictive'],
+        'DYNAMIC_ADJUSTMENT': True,
+        'PREDICTION': True,
     },
     'COGNITIVE_COMPLEXITY': {
         'ENABLED': True,  # Maintains cognitive complexity in inference
@@ -59,6 +57,30 @@ ACTIVE_INFERENCE_CONFIG = {
         'ENABLED': True,  # Flag to enable/disable goal-oriented behavior
         'GOALS': ['survival', 'exploration', 'social_interaction'],  # Specifies the types of goals for agents
         'GOAL_PRIORITIZATION': 'adaptive',  # Specifies the strategy for goal prioritization
+    },
+    'LEARNING_RATE': 0.1,  # Added for enhanced learning capabilities
+    'EFE_CALCULATION_PARAMS': {
+        'DEFAULT': 0.5,  # Placeholder for parameters involved in EFE calculation
+    },
+    'META_LEARNING': {
+        'ENABLED': True,
+        'STRATEGIES': ['experience_replay', 'strategy_optimization'],
+    },
+    'MULTI_OBJECTIVE_DECISION_MAKING': {
+        'ENABLED': True,
+        'INTEGRATION_STRATEGY': 'weighted_sum',
+    },
+    'UNCERTAINTY_MANAGEMENT': {
+        'ENABLED': True,
+        'STRATEGIES': ['risk_averse', 'risk_neutral', 'risk_seeking'],
+    },
+    'COMMUNICATION': {
+        'ENABLED': True,
+        'MODES': ['direct', 'indirect', 'environmental_signaling'],
+    },
+    'LEARNING_MECHANISMS': {
+        'ENABLED': True,
+        'TYPES': ['reinforcement_learning', 'supervised_learning', 'unsupervised_learning'],
     },
 }
 # Consolidated Ant and Colony Configuration Parameters

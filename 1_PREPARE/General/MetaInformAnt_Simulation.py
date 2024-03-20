@@ -1,8 +1,7 @@
-# pymdp_ants.py
-
 import numpy as np
 from pymdp.agent import Agent
-from ant_multimodal import Ant, FoodSource, Environment, Niche
+from InferAnts import ActiveInferenceAgent
+from ant_multimodal import FoodSource, Environment, Niche
 import config
 import metaconfig  # Importing the metaconfig for additional configurations
 
@@ -22,10 +21,8 @@ class MetaInformAntSimulation:
     def _initialize_agents(self):
         agents = []
         for _ in range(self.num_agents):
-            # Utilizing the INITIAL_POSITIONS from config.py for agent creation
             initial_positions = config.ANT_AND_COLONY_CONFIG['COLONY']['INITIAL_POSITIONS']['XYZ']
-            # Including agent parameters in agent creation
-            agent = Ant.create(initial_positions['X'], initial_positions['Y'], config.ANT_AND_COLONY_CONFIG['COLONY']['INFLUENCE_FACTOR'], **self.agent_params)
+            agent = ActiveInferenceAgent(position=np.array([initial_positions['X'], initial_positions['Y']]), influence_factor=config.ANT_AND_COLONY_CONFIG['COLONY']['INFLUENCE_FACTOR'], **self.agent_params)
             agents.append(agent)
         return agents
     
@@ -53,15 +50,23 @@ class MetaInformAntSimulation:
     def execute_simulation(self, simulation_steps):
         for step in range(simulation_steps):
             for agent in self.agents:
-                # Sensory perception phase
-                pheromone_obs, vision_obs, tactile_obs, sound_obs, food_obs = self.simulation_environment.collect_observations(agent, self.food_sources, self.nests)
-                agent.process_observations(pheromone_obs, vision_obs, tactile_obs, sound_obs, food_obs)
+                # Collect observations from the environment
+                observations = self.simulation_environment.collect_observations(agent, self.food_sources, self.nests)
                 
-                # Decision-making and action phase  
+                # Agent perceives the environment
+                agent.perceive(observations)
+                
+                # Agent decides the next action based on EFE
                 chosen_action = agent.decide_next_action()
+                
+                # Apply the chosen action to the environment
                 self.simulation_environment.apply_agent_action(agent, chosen_action)
                 
-                # Check for food collection and nest interactions
+                # Update agent's internal states based on the action and new observations
+                new_observations = self.simulation_environment.collect_observations(agent, self.food_sources, self.nests)
+                agent.update_internal_states(chosen_action, new_observations)
+                
+                # Check for interactions with food sources and nests
                 self.simulation_environment.check_food_collection(agent, self.food_sources)
                 self.simulation_environment.check_nest_interaction(agent, self.nests)
 

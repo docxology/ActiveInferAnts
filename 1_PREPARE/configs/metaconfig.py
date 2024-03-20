@@ -18,8 +18,29 @@ META_CONFIG = {
         },
     },
     'ACTIVE_INFERENCE': {
-        'INFERENCE_MODEL_OPTIONS': ['variational', 'predictive_coding', 'bayesian_filtering'],  # Available inference models
-        'PLANNING_HORIZON_RANGE': (5, 30),  # Range for planning horizon
+        'INFERENCE_MODEL_OPTIONS': ['variational', 'predictive_coding', 'bayesian_filtering', 'deep_active_inference', 'ensemble_methods'],
+        'PLANNING_HORIZON': {
+            'TYPE_OPTIONS': ['fixed', 'adaptive'],
+            'FIXED_RANGE': (5, 30),
+            'ADAPTIVE_STRATEGY_OPTIONS': ['contextual_complexity'],
+        },
+        'ADAPTIVE_LEARNING': {
+            'ENABLED': [True, False],
+            'LEARNING_RATE_RANGE': (0.01, 0.5),
+            'FEEDBACK_SENSITIVITY_OPTIONS': ['fixed', 'adaptive'],
+            'MODEL_UPDATING_OPTIONS': ['online', 'batch'],
+        },
+        'CONTEXT_AWARENESS': {
+            'ENABLED_OPTIONS': [True, False],
+            'DYNAMIC_ADJUSTMENT_OPTIONS': [True, False],
+            'PREDICTION': [True, False],
+            'CONTEXT_INTEGRATION_STRATEGIES': ['multimodal', 'unimodal'],
+        },
+        'PRECISION_WEIGHTING': {
+            'PERCEPTION_RANGE': (0.1, 1.0),
+            'ACTION_RANGE': (0.1, 1.0),
+            'ADAPTIVE': [True, False],
+        },
         'TIME_RESOLUTION_OPTIONS': ['discrete', 'continuous'],  # Available time resolution options
         'PRECISION_WEIGHTING_RANGE': (0.1, 1.0),  # Range for precision weighting
         'GENERALIZATION_DEPTH_RANGE': (1, 10),  # Range for generalization depth
@@ -31,11 +52,6 @@ META_CONFIG = {
         'COGNITIVE_COMPLEXITY_TYPES': ['simple', 'complex', 'hierarchical', 'emergent', 'adaptive'],  # Available cognitive complexity types
         'GOAL_TYPES': ['survival', 'exploration', 'social_interaction'],  # Available goal types
         'EXPECTATION_FREE_ENERGY_OPTIONS': [True, False],  # Options for enabling/disabling calculation of expected free energy
-        'CONTEXT_AWARENESS': {
-            'ENABLED_OPTIONS': [True, False],  # Options for enabling/disabling context awareness
-            'DYNAMIC_ADJUSTMENT_OPTIONS': [True, False],  # Options for enabling/disabling dynamic adjustment based on context changes
-            'CONTEXT_INTEGRATION_STRATEGIES': ['multimodal', 'unimodal'],  # Strategies for integrating multiple contexts
-        },
     },
     'ANT_AND_COLONY': {
         'MOVEMENT_OPTIONS': [

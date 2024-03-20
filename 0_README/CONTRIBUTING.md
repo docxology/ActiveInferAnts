@@ -51,3 +51,23 @@ By contributing to ActiveInferAnts, you agree that your contributions will be li
 We appreciate every contribution and want to thank everyone who has helped make ActiveInferAnts better. Your efforts continue to improve our understanding and implementation of Active Inference in complex systems.
 
 For any questions or further discussion, don't hesitate to open an issue. We're looking forward to your contributions!
+
+## Code of Conduct
+
+We are committed to providing a welcoming and respectful environment for everyone. Please read our [Code of Conduct](ActiveInferAnts/CODE_OF_CONDUCT.md) to understand the expectations for participating in our community.
+
+## Interdisciplinary Contributions
+
+We invite contributions from various disciplines including biology, cognitive science, computer science, and physics. Interdisciplinary research enriches our project and fosters innovative solutions.
+
+## Simulation Enhancements
+
+Contributions that improve or extend simulation capabilities, including performance optimizations, new simulation scenarios, and advanced visualization techniques, are highly encouraged.
+
+## Promoting Active Inference Research
+
+We encourage contributions aligned with the latest research in Active Inference, including theoretical advancements, experimental validations, and novel applications.
+
+## Community Engagement
+
+Engage with the community through discussions, webinars, and workshops. Share knowledge, discuss new ideas, and collaborate on projects to further our collective understanding of Active Inference and ant colony behavior.
