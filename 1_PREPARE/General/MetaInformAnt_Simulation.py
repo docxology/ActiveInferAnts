@@ -1,86 +1,32 @@
 import numpy as np
-from pymdp.agent import Agent
-from InferAnts import ActiveInferenceAgent
-from ant_multimodal import FoodSource, Environment, Niche
+from MetaInformAnt_Simulation import MetaInformAntSimulation
 import config
-import metaconfig  # Importing the metaconfig for additional configurations
+import metaconfig
 
-# Define the MetaInformAnt simulation framework with enhanced features
-class MetaInformAntSimulation:
-    def __init__(self, num_agents, simulation_environment, num_food_sources, num_nests, agent_params, niche_params):
-        self.num_agents = num_agents
-        self.simulation_environment = simulation_environment
-        self.num_food_sources = num_food_sources
-        self.num_nests = num_nests
-        self.agent_params = agent_params  # Storing agent parameters
-        self.niche_params = niche_params  # Storing niche parameters
-        self.agents = self._initialize_agents()
-        self.food_sources = self._initialize_food_sources()
-        self.nests = self._initialize_nests()
-        
-    def _initialize_agents(self):
-        agents = []
-        for _ in range(self.num_agents):
-            initial_positions = config.ANT_AND_COLONY_CONFIG['COLONY']['INITIAL_POSITIONS']['XYZ']
-            agent = ActiveInferenceAgent(position=np.array([initial_positions['X'], initial_positions['Y']]), influence_factor=config.ANT_AND_COLONY_CONFIG['COLONY']['INFLUENCE_FACTOR'], **self.agent_params)
-            agents.append(agent)
-        return agents
-    
-    def _initialize_food_sources(self):
-        food_sources = []
-        for _ in range(self.num_food_sources):
-            # Randomly selecting a resource zone from config.py for food source initialization
-            resource_zone = np.random.choice(config.ENVIRONMENT_CONFIG['RESOURCE_ZONES'])
-            # Including niche parameters in food source creation
-            food_source = FoodSource.create(resource_zone['POSITION']['X'], resource_zone['POSITION']['Y'], **self.niche_params)
-            food_sources.append(food_source)
-        return food_sources
-    
-    def _initialize_nests(self):
-        nests = []
-        for _ in range(self.num_nests):
-            # Randomly selecting a position for nest initialization
-            x_position = np.random.randint(0, config.ENVIRONMENT_CONFIG['GRID']['WIDTH'])
-            y_position = np.random.randint(0, config.ENVIRONMENT_CONFIG['GRID']['HEIGHT'])
-            # Including niche parameters in nest creation
-            nest = Niche.create(x_position, y_position, config.ANT_AND_COLONY_CONFIG['COLONY']['INFLUENCE_FACTOR'], **self.niche_params)
-            nests.append(nest)
-        return nests
-    
-    def execute_simulation(self, simulation_steps):
-        for step in range(simulation_steps):
-            for agent in self.agents:
-                # Collect observations from the environment
-                observations = self.simulation_environment.collect_observations(agent, self.food_sources, self.nests)
-                
-                # Agent perceives the environment
-                agent.perceive(observations)
-                
-                # Agent decides the next action based on EFE
-                chosen_action = agent.decide_next_action()
-                
-                # Apply the chosen action to the environment
-                self.simulation_environment.apply_agent_action(agent, chosen_action)
-                
-                # Update agent's internal states based on the action and new observations
-                new_observations = self.simulation_environment.collect_observations(agent, self.food_sources, self.nests)
-                agent.update_internal_states(chosen_action, new_observations)
-                
-                # Check for interactions with food sources and nests
-                self.simulation_environment.check_food_collection(agent, self.food_sources)
-                self.simulation_environment.check_nest_interaction(agent, self.nests)
-
-# Entry point for the simulation
-def run_simulation():
-    simulation_environment = Environment()  # Assume Environment class is implemented elsewhere
-    
-    # Extracting agent and niche parameters from metaconfig
+def plan_simulation():
+    # Extract simulation settings from configuration
+    simulation_environment = Environment()  # Assuming Environment class is implemented
     agent_params = metaconfig.META_CONFIG['ANT_AND_COLONY']['AGENT_PARAMS']
     niche_params = metaconfig.META_CONFIG['ANT_AND_COLONY']['NICHE_PARAMS']
     
-    meta_inform_ant_simulation = MetaInformAntSimulation(config.SIMULATION_SETTINGS['AGENT_COUNT'], simulation_environment, config.SIMULATION_SETTINGS['FOOD_SOURCE_COUNT'], config.SIMULATION_SETTINGS['NEST_COUNT'], agent_params, niche_params)
-    meta_inform_ant_simulation.execute_simulation(simulation_steps=config.SIMULATION_SETTINGS['MAX_STEPS'])
+    # Initialize the MetaInformAntSimulation with parameters from the config
+    simulation = MetaInformAntSimulation(
+        num_agents=config.SIMULATION_SETTINGS['AGENT_COUNT'],
+        simulation_environment=simulation_environment,
+        num_food_sources=config.SIMULATION_SETTINGS['FOOD_SOURCE_COUNT'],
+        num_nests=config.SIMULATION_SETTINGS['NEST_COUNT'],
+        agent_params=agent_params,
+        niche_params=niche_params
+    )
+    
+    # Pre-simulation rendering
+    render_pre_simulation(simulation_environment, simulation.nests, simulation.food_sources)
+    
+    # Execute the simulation with rendering
+    simulation.execute_simulation(simulation_steps=config.SIMULATION_SETTINGS['MAX_STEPS'], render_callback=render_during_simulation)
+    
+    # Post-simulation rendering
+    render_post_simulation(simulation.get_results())
 
 if __name__ == "__main__":
-    run_simulation()
-
+    plan_simulation()
