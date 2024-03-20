@@ -95,12 +95,16 @@ ANT_AND_COLONY_CONFIG = {
                         (-1, 1), (0, 1), (1, 1)      # Down-left, Down, Down-right
                     ],
                     'PHEROMONE_RELEASE': {
-                        'TYPES': list(reversed(range(9))),  # Unique pheromone types
-                        'MAX_RATE': 5,  # Max release rate per time step
-                        'QUEEN_PHEROMONE': 0,  # Identifier for queen pheromone
+                        'TYPES': {
+                            'lipid_based': {'id': 1, 'max_rate': 3},
+                            'small_molecules': {'id': 2, 'max_rate': 5},
+                            'proteinaceous': {'id': 3, 'max_rate': 4},
+                            'volatile_compounds': {'id': 4, 'max_rate': 6}
+                        },
+                        'QUEEN_PHEROMONE': 'lipid_based',  # Identifier for queen pheromone
                     },
                     'SOUND_PRODUCTION': {
-                        'TYPES': ['stridulation', 'sing', 'talk', 'grunt'],
+                        'TYPES': ['stridulation', 'sing', 'talk', 'grunt', 'tremble', 'waggle'],
                         'INTENSITY_LEVELS': 5,  # Levels of sound intensity
                     },
                 },

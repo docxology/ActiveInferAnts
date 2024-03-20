@@ -1,4 +1,4 @@
-# ActiveInferAnts
+# Active InferAnts
 
 ActiveInferAnts is a cutting-edge computational framework designed for simulating ant colony behaviors and complex systems through the lens of Active Inference and the Free Energy Principle.
 
