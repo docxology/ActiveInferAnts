@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 class SimulationSummary:
     def __init__(self, simulation_results):
         self.simulation_results = simulation_results
+        self.total_agents = len(simulation_results['agents'])  # Store total agents count
 
     def generate_summary(self):
         summary = {
@@ -20,7 +21,7 @@ class SimulationSummary:
         return summary
 
     def _total_agents(self):
-        return len(self.simulation_results['agents'])
+        return self.total_agents
 
     def _total_food_sources(self):
         return len(self.simulation_results['food_sources'])
@@ -30,7 +31,7 @@ class SimulationSummary:
 
     def _average_agent_energy(self):
         total_energy = sum(agent['energy'] for agent in self.simulation_results['agents'])
-        return total_energy / self._total_agents()
+        return total_energy / self.total_agents if self.total_agents > 0 else 0
 
     def _total_food_collected(self):
         return sum(nest['food_collected'] for nest in self.simulation_results['nests'])
@@ -68,14 +69,15 @@ def save_summary_to_file(summary, file_path):
             file.write(f"{key}: {value}\n")
 
 def save_summary_to_csv(summary, file_path):
-    pd.DataFrame([summary]).to_csv(file_path, index=False)
+    pd.DataFrame.from_records([summary]).to_csv(file_path, index=False)
 
 def plot_agent_energy_distribution(agents, file_path):
     energies = [agent['energy'] for agent in agents]
-    plt.hist(energies, bins=10)
+    plt.hist(energies, bins=10, color='skyblue', edgecolor='black')
     plt.title('Agent Energy Distribution')
     plt.xlabel('Energy')
     plt.ylabel('Frequency')
+    plt.grid(axis='y', alpha=0.75)
     plt.savefig(file_path)
     plt.close()
 

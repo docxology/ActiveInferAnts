@@ -28,21 +28,24 @@ class InferenceResponse(BaseModel):
 
 @app.post("/advanced_infer/", response_model=InferenceResponse)
 async def perform_advanced_inference(request: AdvancedInferenceRequest, background_tasks: BackgroundTasks):
-    """
-    Asynchronously performs inference using the ActiveInferAnts package.
-    """
     try:
-        inference_engine = AdvancedInferenceEngine()
+        if request.secure_compute:
+            secure_session = SecureComputeSession()
+            inference_engine = AdvancedInferenceEngine(secure_session)
+        else:
+            inference_engine = AdvancedInferenceEngine()
+        
         background_tasks.add_task(inference_engine.process_advanced, request.data, request.inference_type, request.simulation_steps, request.agent_params, request.niche_params)
         return InferenceResponse(result={"status": "Advanced inference task started successfully"})
+    except ValueError as ve:
+        return InferenceResponse(result={}, error=f"Value Error: {str(ve)}")
     except Exception as e:
-        return InferenceResponse(result={}, error=str(e))
+        return InferenceResponse(result={}, error=f"Unexpected Error: {str(e)}")
 
 @app.get("/detailed_status/")
 async def check_detailed_status():
-    """
-    Check the detailed status of the inference engine.
-    """
-    # Placeholder for actual detailed status check logic
-    # This could involve querying the AdvancedInferenceEngine for its current state
-    return {"status": "operational", "active_tasks": 5, "completed_tasks": 10, "errors": []}
+    # Conceptual placeholder for enhanced logic
+    # This would involve querying the AdvancedInferenceEngine for its current state
+    engine_status = AdvancedInferenceEngine.get_status()
+    return engine_status
+

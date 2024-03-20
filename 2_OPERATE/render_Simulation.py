@@ -7,39 +7,38 @@ class SimulationRenderer:
         self.nests = nests
         self.agents = agents
         self.fig, self.ax = plt.subplots()
+        self.setup_plot_environment()
     
-    def setup_environment(self):
-        """Initial setup of the simulation environment for visualization."""
-        self.ax.clear()
+    def setup_plot_environment(self):
+        """Configure the plot environment for the simulation."""
         self.ax.set_xlim(0, self.simulation_environment.width)
         self.ax.set_ylim(0, self.simulation_environment.height)
-        self.ax.set_title('Simulation Initialization')
-        # Plot nests
-        for nest in self.nests:
-            self.ax.plot(nest.x, nest.y, 'ro')  # Represent nests with red dots
-        # Plot initial positions of agents
-        for agent in self.agents:
-            self.ax.plot(agent.x, agent.y, 'bo')  # Represent agents with blue dots
+        self.ax.set_title('Simulation Environment Setup')
     
-    def update_visualization(self, frame):
-        """Dynamic visualization updated during the simulation."""
+    def plot_entities(self, entities, color, label):
+        """Generic method to plot entities on the simulation environment."""
+        positions = [(entity.x, entity.y) for entity in entities]
+        if positions:
+            self.ax.scatter(*zip(*positions), c=color, label=label)
+    
+    def refresh_environment(self, frame=None):
+        """Refresh the environment for the next frame or step."""
         self.ax.clear()
-        self.ax.set_xlim(0, self.simulation_environment.width)
-        self.ax.set_ylim(0, self.simulation_environment.height)
-        self.ax.set_title(f'Simulation Step: {frame}')
-        # Update positions of agents
-        for agent in self.agents:
-            self.ax.plot(agent.x, agent.y, 'bo')  # Update agent positions
+        self.setup_plot_environment()
+        if frame is not None:
+            self.ax.set_title(f'Simulation Step: {frame}')
+        self.plot_entities(self.nests, 'r', 'Nests')
+        self.plot_entities(self.agents, 'b', 'Agents')
     
     def animate_simulation(self, steps):
-        """Create an animation representing the simulation over time."""
-        anim = animation.FuncAnimation(self.fig, self.update_visualization, frames=steps, interval=100)
+        """Animate the simulation over a given number of steps."""
+        animation.FuncAnimation(self.fig, self.refresh_environment, frames=steps, interval=100)
+        plt.legend()
         plt.show()
     
     def render_post_simulation(self, simulation_results):
-        """Detailed visualization after the simulation has concluded."""
-        self.ax.clear()
+        """Visualize the results after the simulation has concluded."""
+        self.refresh_environment()
         self.ax.set_title('Post-Simulation Analysis')
-        # Example: Plot trajectories or summarize behaviors
-        # This is a placeholder for post-simulation visualization logic
+        # Extend with specific post-simulation visualization logic
         plt.show()

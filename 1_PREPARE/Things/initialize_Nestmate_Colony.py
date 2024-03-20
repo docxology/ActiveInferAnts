@@ -14,8 +14,11 @@ def initialize_nest(nest_id: int, agent_count: int, env_config: Dict[str, Any], 
     return nestmates
 
 def initialize_single_nestmate(nest_id: int, nestmate_id: int, developmental_parameters: Dict[str, Any], position: Tuple[int, int], ant_config: Dict[str, Any], meta_config: Dict[str, Any]) -> ActiveNestmate:
+    # Assuming INFLUENCE_FACTOR_RANGE is defined in ant_config as shown in config.py
     influence_factor = np.random.uniform(*ant_config['INFLUENCE_FACTOR_RANGE'])
+    # Assuming ACTIVE_INFERENCE parameters are correctly structured in meta_config
     agent_params = {**meta_config['ACTIVE_INFERENCE'], **developmental_parameters}
+    # Initialize ActiveNestmate with the provided parameters
     nestmate = ActiveNestmate(position=position, influence_factor=influence_factor, **agent_params)
     return nestmate
 
@@ -25,4 +28,3 @@ def generate_developmental_parameters() -> Dict[str, Any]:
         'exploration_tendency': np.random.choice(['low', 'medium', 'high']),
     }
 ``
- 
