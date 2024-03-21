@@ -1,13 +1,17 @@
-**Overview:**  
-- This .0 is an introduction to the Active InferAnts project.
-- Active InferAnts applying Active Inference and the Free Energy Principle to Ants.
-- We are using various methods including synthetic intelligence and symbolic co-creation techniques. 
+# Overview
+- Introduction to the Active InferAnts project.
+- Application of Active Inference and the Free Energy Principle to ant behavior.
+- Utilization of synthetic intelligence and symbolic co-creation techniques.
 
-**Background**
-- Friedman Daniel Ari, Tschantz Alec, Ramstead Maxwell J. D., Friston Karl, Constant Axel. "Active Inferants: An Active Inference Framework for Ant Colony Behavior." Frontiers in Behavioral Neuroscience, vol. 15, 2021, https://www.frontiersin.org/articles/10.3389/fnbeh.2021.647732, DOI: 10.3389/fnbeh.2021.647732.
-- ActInf Livestream #029.0 https://youtu.be/SNbfAkOokAI , #029.1 https://www.youtube.com/watch?v=Z0fpX5Lpp0Y , #029.2 https://youtu.be/Z4S5JVoeGBw .
+# Background
+- Friedman, D. A., Tschantz, A., Ramstead, M. J. D., Friston, K., & Constant, A. (2021). "Active Inferants: An Active Inference Framework for Ant Colony Behavior." *Frontiers in Behavioral Neuroscience, 15*. [DOI: 10.3389/fnbeh.2021.647732](https://www.frontiersin.org/articles/10.3389/fnbeh.2021.647732)
+- ActInf Livestream Episodes:
+  - [#029.0](https://youtu.be/SNbfAkOokAI)
+  - [#029.1](https://www.youtube.com/watch?v=Z0fpX5Lpp0Y)
+  - [#029.2](https://youtu.be/Z4S5JVoeGBw)
 
-**Methods**
-- We are using cursor.sh for development and utilizing GPT-4 as our core computational model.
-- After hours of nestmate-in-the-loop collaboration within the cursor.sh niche, a milestone prototype of Active InferAnts v1. scheme was reached
-- This is an initial prototype stage. I expect collaboration to broaden on many fronts, and the entire thing to be re/written.
+# Methods
+- Development environment: cursor.sh.
+- Core computational model: GPT-4.
+- Achievement: Milestone prototype of Active InferAnts v1.0 following extensive nestmate-in-the-loop collaboration.
+- Stage: Initial prototype, with expectations for broadened collaboration and comprehensive re/writing.
