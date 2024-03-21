@@ -1,6 +1,7 @@
 import numpy as np
 import config
 from typing import Dict, Any, Callable
+from scipy.stats import entropy
 
 class ActiveInferenceAgent:
     def __init__(self, position: np.ndarray, influence_factor: float, **agent_params: Dict[str, Any]):
@@ -79,17 +80,28 @@ class ActiveInferenceAgent:
         
         return vfe
 
-    def calculate_efe(self, action: np.ndarray, future_states: np.ndarray, preferences: np.ndarray) -> float:
-    def calculate_efe(self, action: np.ndarray) -> float:
+    def calculate_efe(self, action: np.ndarray, future_states: np.ndarray, preferences: np.ndarray, uncertainty: float) -> float:
         """
-        Calculate Expected Free Energy (EFE) for a given agent in a moment.
+        Calculate Expected Free Energy (EFE) for a given action, considering future states, preferences, and uncertainty.
 
         :param action: The action to calculate EFE for.
+        :param future_states: Predicted future states resulting from the action.
+        :param preferences: Agent's preferences over states.
+        :param uncertainty: A measure of uncertainty or confidence in the prediction of future states.
         :return: EFE value.
         """
-        # Placeholder for EFE calculation logic
-        # Assuming EFE is calculated as a function of action, current position, and influence factor
-        return np.sum(np.square(action - self.position)) * self.influence_factor
+        # Assuming future_states and preferences are distributions (e.g., probabilities of being in each state)
+        
+        # Pragmatic value: KL divergence between predicted future states and preferred states
+        pragmatic_value = np.sum(future_states * (np.log(future_states) - np.log(preferences)))
+        
+        # Epistemic value: Entropy of the future states - represents uncertainty reduction
+        epistemic_value = entropy(future_states)
+        
+        # EFE is the sum of pragmatic and epistemic values, modulated by action cost
+        efe = pragmatic_value + epistemic_value
+        
+        return efe
 
     def decide_next_action(self) -> np.ndarray:
         """

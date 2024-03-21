@@ -50,8 +50,9 @@ def clone_user_repos(username: str, target_dir: str) -> None:
         clone_repo(git_url, target_dir)
 if __name__ == "__main__":
     users_to_clone = {
-        "ActiveInference": ["infer-actively", "daphnedemekas", "conorheins", "ChampiB", "zfountas", "alec-tschantz", "schwartenbeckph", "tejparr", "biaslab", "rssmith33", "ActiveInferenceInstitute"],
-        # More Active Inference: "HMCL-UNIST", "AP6YC"," "ago109", fabio-deep", "BerenMillidge", "fgregoretti", "cpezzato", "edluyuan","djcrw", "spm", "wmkouw", "tomekkorbak"
+        "ActiveInference": ["infer-actively", "ago109", "daphnedemekas", "conorheins", "ChampiB", "zfountas", "alec-tschantz", "schwartenbeckph", "tejparr", "biaslab", "rssmith33"],
+        # More Active Inference: "HMCL-UNIST", "AP6YC", fabio-deep", "BerenMillidge", "fgregoretti", "cpezzato", "edluyuan","djcrw", "spm", "wmkouw", "tomekkorbak"
+        # "ActiveInferenceInstitute" -- for bringing in examples, educational materials, transcripts, etc. 
         "Synergetics": ["4dsolutions"],
         # "Ants": ["Social-Insect-Genomics", "cdanielcadena", "cooplab", "johnssproul", "pbfrandsen", "PeterMulhair", "fohebert", "guillemylla", "guo-cheng"],
         #"Agents": ["Anthropic", "OpenAI", "Significant-Gravitas", "yoheinakajima", "TransformerOptimus", "Paitesanshi", "kyrolabs", "lafmdp", "Jenqyang", "e2b-dev", "OpenBMB"]

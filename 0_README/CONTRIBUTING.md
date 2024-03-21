@@ -8,7 +8,7 @@ There are several ways you can contribute to ActiveInferAnts:
 
 - **Report Bugs**: If you encounter any bugs, please open an issue on our [GitHub issues page](https://github.com/infer-actively/pymdp/issues) with detailed information about the bug, steps to reproduce it, and your environment setup.
 
-- **Implement Features or New Methods**: We are always looking to expand the capabilities of pymdp. If you have an idea for a new feature or method, start by opening an issue to discuss it. See more details in the [Implement Features or New Methods](ActiveInferAnts/9_OTHER/pymdp/CONTRIBUTING.md#L31-L39) section.
+- **Implement Features or New Methods**: We are always looking to expand the capabilities of pymdp. If you have an idea for a new feature or method, start by opening an issue to discuss it.
 
 - **Improve Documentation**: Good documentation is crucial. Feel free to submit PRs focused on fixing, improving, or refactoring documentation.
 
@@ -18,9 +18,9 @@ There are several ways you can contribute to ActiveInferAnts:
 
 Before you start coding, make sure to set up your environment properly:
 
-1. Fork the repository.
-2. Clone your fork and set up the upstream repository. For detailed instructions, see [Setup](ActiveInferAnts/9_OTHER/pymdp/CONTRIBUTING.md#L64-L90).
-3. Install the project dependencies. For pymdp, you can follow the steps outlined [here](ActiveInferAnts/9_OTHER/pymdp/README.md#L118-L124).
+1. Act to clone or fork the repository.
+2. Infer what project dependencies need to be installed.
+3. Serve the niche through interaction & co-enactment.  
 
 ## Making Changes
 
@@ -28,8 +28,6 @@ Before you start coding, make sure to set up your environment properly:
 2. After discussion, start coding. Make sure to follow the Pythonic naming conventions and write clean, readable code.
 3. Add or update tests for the new feature or fix.
 4. Update the documentation to reflect your changes or additions.
-
-For detailed steps on how to make changes, refer to [After you finish coding](ActiveInferAnts/9_OTHER/pymdp/CONTRIBUTING.md#L136-L146).
 
 ## Submitting Changes
 
@@ -44,11 +42,13 @@ After submitting your PR, the maintainers will review your changes. Some automat
 
 ## License
 
-By contributing to ActiveInferAnts, you agree that your contributions will be licensed under its [MIT License](ActiveInferAnts/LICENSE).
+By contributing to ActiveInferAnts, you agree that your contributions will be licensed under its [License](ActiveInferAnts/LICENSE).
 
 ## Acknowledgments
 
-We appreciate every contribution and want to thank everyone who has helped make ActiveInferAnts better. Your efforts continue to improve our understanding and implementation of Active Inference in complex systems.
+We appreciate every contribution and want to thank everyone who has helped make ActiveInferAnts better. 
+
+Your efforts continue to improve our understanding and implementation of Active Inference in complex systems.
 
 For any questions or further discussion, don't hesitate to open an issue. We're looking forward to your contributions!
 
@@ -64,10 +64,13 @@ We invite contributions from various disciplines including biology, cognitive sc
 
 Contributions that improve or extend simulation capabilities, including performance optimizations, new simulation scenarios, and advanced visualization techniques, are highly encouraged.
 
-## Promoting Active Inference Research
+## Advancing Active Inference Research
 
-We encourage contributions aligned with the latest research in Active Inference, including theoretical advancements, experimental validations, and novel applications.
+Contributions that align with the latest Active Inference research, including theoretical, experimental, or application-based advancements, are highly encouraged.
 
-## Community Engagement
+## Engaging with the Community
 
-Engage with the community through discussions, webinars, and workshops. Share knowledge, discuss new ideas, and collaborate on projects to further our collective understanding of Active Inference and ant colony behavior.
+Participate in discussions, webinars, and workshops. Share knowledge, explore new ideas, and collaborate on projects to deepen our understanding of Active Inference and ant colony behaviors.
+
+Contact us via email at:
+blanket@activeinference.institute
