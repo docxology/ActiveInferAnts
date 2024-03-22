@@ -161,3 +161,4 @@ if __name__ == "__main__":
     angle = vec_ivm.angle_with(vec2_xyz)
     angle_display = f"{angle:.2f} degrees" if not math.isnan(angle) else "NaN"
     print(f"| {'Dot Product and Angle':30} | {'vec_ivm & vec2_xyz':20} | {dot_product}, {angle_display} |")
+

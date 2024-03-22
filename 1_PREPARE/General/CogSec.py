@@ -194,3 +194,4 @@ if __name__ == "__main__":
     colony = []  # Placeholder for the actual colony instances
     cog_sec = CognitiveSecurity(colony)
     cog_sec.decision_making_process()
+

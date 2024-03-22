@@ -15,3 +15,4 @@
 - Core computational model: GPT-4.
 - Achievement: Milestone prototype of Active InferAnts v1.0 following extensive nestmate-in-the-loop collaboration.
 - Stage: Initial prototype, with expectations for broadened collaboration and comprehensive re/writing.
+

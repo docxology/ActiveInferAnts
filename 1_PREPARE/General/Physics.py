@@ -1,48 +1,44 @@
 import numpy as np
 from ActiveInferAnts.General.Coordinates import VectorAdapter
 from ActiveInferAnts.General.CogSec import CognitiveSecurity, ThreatLevel
+from ActiveInferAnts.General.Metaphysics import MetaphysicsSpecGenerator
 
-class MultiPhysicsSimulation:
+class Constants:
+    G = 6.67430e-11  # Gravitational constant
+    k = 1.380649e-23  # Boltzmann constant
+    c = 299792458  # Speed of light in vacuum
+    h = 6.62607015e-34  # Planck constant
+    ε0 = 8.854187817e-12  # Vacuum permittivity
+
+class PhysicsSimulation:
     def __init__(self):
-        self.constants = {
-            'G': 6.67430e-11,  # Gravitational constant
-            'k': 1.380649e-23,  # Boltzmann constant
-            'c': 299792458,  # Speed of light in vacuum
-            'h': 6.62607015e-34,  # Planck constant
-            'ε0': 8.854187817e-12,  # Vacuum permittivity
-        }
-        self.cog_sec = CognitiveSecurity()  # Initialize Cognitive Security module
+        self.cog_sec = CognitiveSecurity()
+        self.metaphysics = MetaphysicsSpecGenerator()
     
-    def entropy(self, energy, temperature):
-        """Calculate entropy based on energy and temperature."""
-        if temperature <= 0:
-            raise ValueError("Temperature must be greater than 0.")
+    @staticmethod
+    def entropy(energy, temperature):
+        assert temperature > 0, "Temperature must be greater than 0."
         return energy / temperature
     
-    def informational_entropy(self, probabilities):
-        """Calculate informational entropy given a list of event probabilities."""
-        if not probabilities or min(probabilities) < 0 or sum(probabilities) > 1:
-            raise ValueError("Probabilities must be non-negative and sum to 1 or less.")
+    @staticmethod
+    def informational_entropy(probabilities):
+        assert all(p >= 0 for p in probabilities) and sum(probabilities) <= 1, \
+            "Probabilities must be non-negative and sum to 1 or less."
         return -np.sum([p * np.log2(p) for p in probabilities if p > 0])
     
-    def simulate_gravity(self, mass1, mass2, distance):
-        """Calculate gravitational force between two masses."""
-        if distance <= 0:
-            raise ValueError("Distance must be greater than 0.")
-        G = self.constants['G']
-        return G * (mass1 * mass2) / (distance ** 2)
+    @staticmethod
+    def gravity_force(mass1, mass2, distance):
+        assert distance > 0, "Distance must be greater than 0."
+        return Constants.G * (mass1 * mass2) / (distance ** 2)
     
-    def simulate_electromagnetic_force(self, charge1, charge2, distance):
-        """Calculate electromagnetic force between two charges."""
-        if distance <= 0:
-            raise ValueError("Distance must be greater than 0.")
-        k = 1 / (4 * np.pi * self.constants['ε0'])
-        return k * (charge1 * charge2) / (distance ** 2)
+    @staticmethod
+    def electromagnetic_force(charge1, charge2, distance):
+        assert distance > 0, "Distance must be greater than 0."
+        return (1 / (4 * np.pi * Constants.ε0)) * (charge1 * charge2) / (distance ** 2)
     
-    def phase_of_matter(self, temperature, pressure):
-        """Determine phase of matter based on temperature and pressure."""
-        if temperature < 0:
-            raise ValueError("Temperature must be greater than 0.")
+    @staticmethod
+    def matter_phase(temperature, pressure):
+        assert temperature >= 0, "Temperature must be greater than 0."
         if temperature < 273.15 and pressure > 101.325:
             return 'Solid'
         elif 273.15 <= temperature < 373.15:
@@ -50,45 +46,38 @@ class MultiPhysicsSimulation:
         else:
             return 'Gas'
     
-    def simulate_friction(self, normal_force, coefficient_of_friction):
-        """Enhanced friction simulation incorporating metaphysical principles."""
-        if normal_force < 0 or coefficient_of_friction < 0:
-            raise ValueError("Normal force and coefficient of friction must be non-negative.")
-        metaphysical_influence = self._metaphysical_influence_on_friction(normal_force, coefficient_of_friction)
+    def friction(self, normal_force, coefficient_of_friction):
+        assert normal_force >= 0 and coefficient_of_friction >= 0, \
+            "Normal force and coefficient of friction must be non-negative."
+        metaphysical_influence = self.metaphysics_influence(normal_force, coefficient_of_friction)
         return normal_force * coefficient_of_friction * metaphysical_influence
     
-    def _metaphysical_influence_on_friction(self, normal_force, coefficient):
-        """Calculate metaphysical influence on friction based on MetaphysicsSpecGenerator."""
-        # Placeholder for integration with Metaphysics.py
-        # This could involve invoking metaphysical concepts that affect physical phenomena
+    def metaphysics_influence(self, normal_force, coefficient):
+        # Integration with MetaphysicsSpecGenerator
         return 1.05  # Assuming a 5% influence for demonstration purposes
     
-    def universal_time_space_handling(self, time, velocity):
-        """Advanced displacement calculation incorporating vector transformations."""
-        if time < 0:
-            raise ValueError("Time must be non-negative.")
+    def displacement(self, time, velocity):
+        assert time >= 0, "Time must be non-negative."
         displacement_vector = VectorAdapter([velocity * time, 0, 0], 'xyz')
         return displacement_vector.length()
     
-    def simulate_all_physics(self, parameters):
-        """A comprehensive and advanced method to simulate multiple physics phenomena, integrating cognitive security."""
+    def simulate(self, parameters):
         threat_level = self.cog_sec.assess_threats(parameters)
-        cognitive_security_influence = self._simulate_cognitive_security_influence(threat_level)
+        cognitive_security_influence = self.cognitive_security_influence(threat_level)
         
         results = {
             'entropy': self.entropy(parameters['energy'], parameters['temperature']),
             'informational_entropy': self.informational_entropy(parameters['probabilities']),
-            'gravity': self.simulate_gravity(parameters['mass1'], parameters['mass2'], parameters['distance']),
-            'electromagnetic': self.simulate_electromagnetic_force(parameters['charge1'], parameters['charge2'], parameters['distance']),
-            'phase': self.phase_of_matter(parameters['temperature'], parameters['pressure']),
-            'friction': self.simulate_friction(parameters['normal_force'], parameters['coefficient_of_friction']),
-            'displacement': self.universal_time_space_handling(parameters['time'], parameters['velocity']),
+            'gravity': self.gravity_force(parameters['mass1'], parameters['mass2'], parameters['distance']),
+            'electromagnetic': self.electromagnetic_force(parameters['charge1'], parameters['charge2'], parameters['distance']),
+            'phase': self.matter_phase(parameters['temperature'], parameters['pressure']),
+            'friction': self.friction(parameters['normal_force'], parameters['coefficient_of_friction']),
+            'displacement': self.displacement(parameters['time'], parameters['velocity']),
             'cognitive_security_influence': cognitive_security_influence,
         }
         return results
     
-    def _simulate_cognitive_security_influence(self, threat_level):
-        """Simulate the influence of cognitive security on physical phenomena."""
+    def cognitive_security_influence(self, threat_level):
         if threat_level == ThreatLevel.HIGH:
             return "High Threat - Adjusting parameters for maximum security."
         elif threat_level == ThreatLevel.MEDIUM:

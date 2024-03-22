@@ -1,7 +1,23 @@
 import numpy as np
 import config
-from typing import Dict, Any, Callable
+from typing import Dict, Any
 from scipy.stats import entropy
+
+class MatrixInitializer:
+    """
+    A class to initialize matrices based on configuration or default to zeros.
+    """
+    @staticmethod
+    def initialize(config_key: str, agent_params: Dict[str, Any], *dims) -> np.ndarray:
+        """
+        Static method to initialize a matrix.
+
+        :param config_key: Configuration key for the matrix.
+        :param agent_params: Agent parameters containing configuration.
+        :param dims: Dimensions for the matrix.
+        :return: A numpy array representing the initialized matrix.
+        """
+        return agent_params.get(config_key, np.zeros(dims))
 
 class ActiveInferenceAgent:
     def __init__(self, position: np.ndarray, influence_factor: float, **agent_params: Dict[str, Any]):
@@ -15,20 +31,10 @@ class ActiveInferenceAgent:
         self.position = position
         self.influence_factor = influence_factor
         self.agent_params = agent_params
-        self.A_matrix = self._initialize_matrix('A_matrix_config', self.agent_params.get('SENSORY_MODALITIES'), self.agent_params.get('OBSERVATION_DIM'))
-        self.B_matrix = self._initialize_matrix('B_matrix_config', self.agent_params.get('ACTION_MODALITIES'), self.agent_params.get('STATE_DIM'), self.agent_params.get('STATE_DIM'))
-        self.C_matrix = self._initialize_matrix('C_matrix_config', self.agent_params.get('OBSERVATION_DIM'))
-        self.D_matrix = self._initialize_matrix('D_matrix_config', self.agent_params.get('STATE_DIM'))
-
-    def _initialize_matrix(self, config_key: str, *dims):
-        """
-        Initialize a matrix based on configuration or default to zeros.
-
-        :param config_key: Configuration key for the matrix.
-        :param dims: Dimensions for the matrix.
-        :return: A numpy array representing the initialized matrix.
-        """
-        return self.agent_params.get(config_key, np.zeros(dims))
+        self.A_matrix = MatrixInitializer.initialize('A_matrix_config', agent_params, agent_params.get('SENSORY_MODALITIES'), agent_params.get('OBSERVATION_DIM'))
+        self.B_matrix = MatrixInitializer.initialize('B_matrix_config', agent_params, agent_params.get('ACTION_MODALITIES'), agent_params.get('STATE_DIM'), agent_params.get('STATE_DIM'))
+        self.C_matrix = MatrixInitializer.initialize('C_matrix_config', agent_params, agent_params.get('OBSERVATION_DIM'))
+        self.D_matrix = MatrixInitializer.initialize('D_matrix_config', agent_params, agent_params.get('STATE_DIM'))
 
     def perceive(self, observations: np.ndarray):
         """
@@ -155,3 +161,4 @@ class ActiveNestmate(ActiveInferenceAgent):
     def __init__(self, position: np.ndarray, influence_factor: float, **agent_params: Dict[str, Any]):
         super().__init__(position, influence_factor, **agent_params)
         self.nestmate_config = config.ANT_AND_COLONY_CONFIG['NESTMATE']
+

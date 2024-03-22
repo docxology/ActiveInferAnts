@@ -111,10 +111,6 @@ ANT_AND_COLONY_CONFIG = {
                 'SENSE': {
                     'OBSERVATIONS': {
                         'VISION': 3,  # Visual observation modalities
-                        'TACTILE': 2,  # Tactile observations
-                        'AUDITORY': 3,  # Auditory observations
-                    },
-                    'PERCEPTUAL_FIELD': {
                         'WIDTH': 3,  # Width of the perceptual field
                         'HEIGHT': 3,  # Height of the perceptual field
                         'TOTAL_SIZE': np.prod((3, 3)),  # Total size, calculated from width and height
@@ -147,7 +143,6 @@ ANT_AND_COLONY_CONFIG = {
             },
         },
     },
-        },
     'COLONY': {
         'INITIAL_POSITIONS': {
             'XYZ': {'X': 20, 'Y': 30, 'Z': 5},  # Initial position in a 3D space
