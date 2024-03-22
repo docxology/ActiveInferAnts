@@ -1,4 +1,6 @@
 import numpy as np
+from ActiveInferAnts.General.Coordinates import VectorAdapter
+from ActiveInferAnts.General.CogSec import CognitiveSecurity, ThreatLevel
 
 class MultiPhysicsSimulation:
     def __init__(self):
@@ -9,6 +11,7 @@ class MultiPhysicsSimulation:
             'h': 6.62607015e-34,  # Planck constant
             'ε0': 8.854187817e-12,  # Vacuum permittivity
         }
+        self.cog_sec = CognitiveSecurity()  # Initialize Cognitive Security module
     
     def entropy(self, energy, temperature):
         """Calculate entropy based on energy and temperature."""
@@ -46,6 +49,7 @@ class MultiPhysicsSimulation:
             return 'Liquid'
         else:
             return 'Gas'
+    
     def simulate_friction(self, normal_force, coefficient_of_friction):
         """Enhanced friction simulation incorporating metaphysical principles."""
         if normal_force < 0 or coefficient_of_friction < 0:
@@ -63,17 +67,14 @@ class MultiPhysicsSimulation:
         """Advanced displacement calculation incorporating vector transformations."""
         if time < 0:
             raise ValueError("Time must be non-negative.")
-        displacement_vector = self._calculate_displacement_vector(time, velocity)
-        return displacement_vector.magnitude()
-    
-    def _calculate_displacement_vector(self, time, velocity):
-        """Integrate with Coordinates.py to handle displacement as a vector."""
-        # Placeholder for integration with Coordinates.py
-        # This could involve creating a Vector object and applying transformations
-        return Vector([velocity * time, 0, 0])  # Simplified example
+        displacement_vector = VectorAdapter([velocity * time, 0, 0], 'xyz')
+        return displacement_vector.length()
     
     def simulate_all_physics(self, parameters):
         """A comprehensive and advanced method to simulate multiple physics phenomena, integrating cognitive security."""
+        threat_level = self.cog_sec.assess_threats(parameters)
+        cognitive_security_influence = self._simulate_cognitive_security_influence(threat_level)
+        
         results = {
             'entropy': self.entropy(parameters['energy'], parameters['temperature']),
             'informational_entropy': self.informational_entropy(parameters['probabilities']),
@@ -82,12 +83,15 @@ class MultiPhysicsSimulation:
             'phase': self.phase_of_matter(parameters['temperature'], parameters['pressure']),
             'friction': self.simulate_friction(parameters['normal_force'], parameters['coefficient_of_friction']),
             'displacement': self.universal_time_space_handling(parameters['time'], parameters['velocity']),
-            'cognitive_security_influence': self._simulate_cognitive_security_influence(parameters),
+            'cognitive_security_influence': cognitive_security_influence,
         }
-        
-    def _simulate_cognitive_security_influence(self, parameters):
-        """Simulate the influence of cognitive security on physical phenomena."""
-        # Placeholder for integration with CogSec.py
-        # This could involve assessing threat levels and adjusting physical parameters accordingly
-        return "Low Threat"  # Simplified example
         return results
+    
+    def _simulate_cognitive_security_influence(self, threat_level):
+        """Simulate the influence of cognitive security on physical phenomena."""
+        if threat_level == ThreatLevel.HIGH:
+            return "High Threat - Adjusting parameters for maximum security."
+        elif threat_level == ThreatLevel.MEDIUM:
+            return "Medium Threat - Moderate adjustments applied."
+        else:
+            return "Low Threat - Standard operation parameters."

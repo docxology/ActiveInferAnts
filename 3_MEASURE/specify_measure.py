@@ -12,40 +12,40 @@ class QuantumCognitiveMeasure:
         
         Parameters:
         - measurement_name (str): Name of the measurement.
-        - qrf_parameters (Dict[str, Any]): Parameters for QRF calculations.
-        - measurement_methods (List[str]): List of measurement methods/apparatus.
+        - qrf_parameters (Optional[Dict[str, Any]]): Parameters for QRF calculations, defaults to an empty dict.
+        - measurement_methods (Optional[List[str]]): List of measurement methods/apparatus, defaults to an empty list.
         """
         self.measurement_name = measurement_name
-        self.qrf_parameters = qrf_parameters if qrf_parameters is not None else {}
-        self.measurement_methods = measurement_methods if measurement_methods is not None else []
+        self.qrf_parameters = qrf_parameters or {}
+        self.measurement_methods = measurement_methods or []
     
-    def specify_qrf_parameters(self) -> Dict[str, Any]:
+    def get_qrf_parameters(self) -> Dict[str, Any]:
         """
-        Specifies the QRF parameters.
+        Retrieves the QRF parameters.
         
         Returns:
         - Dict[str, Any]: QRF parameters.
         """
         return self.qrf_parameters
     
-    def specify_measurement_methods(self) -> List[Dict[str, str]]:
+    def get_measurement_methods(self) -> List[Dict[str, str]]:
         """
-        Specifies the measurement methods/apparatus to be used.
+        Retrieves the measurement methods/apparatus to be used.
         
         Returns:
         - List[Dict[str, str]]: Detailed list of measurement methods/apparatus.
         """
-        return [{"method": method, "description": "Detailed description of the method"} for method in self.measurement_methods]
+        return [{"method": method, "description": f"Description for {method}"} for method in self.measurement_methods]
     
-    def generate_measurement_specification(self) -> Dict[str, Any]:
+    def compile_measurement_specification(self) -> Dict[str, Any]:
         """
-        Generates a comprehensive specification for the quantum cognitive measurement.
+        Compiles a comprehensive specification for the quantum cognitive measurement.
         
         Returns:
-        - Dict[str, Any]: All specifications of the measurement.
+        - Dict[str, Any]: Compiled specifications of the measurement.
         """
         return {
             "measurement_name": self.measurement_name,
-            "qrf_parameters": self.specify_qrf_parameters(),
-            "measurement_methods": self.specify_measurement_methods()
+            "qrf_parameters": self.get_qrf_parameters(),
+            "measurement_methods": self.get_measurement_methods()
         }

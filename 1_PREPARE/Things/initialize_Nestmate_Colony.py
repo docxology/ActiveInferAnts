@@ -1,8 +1,8 @@
 import numpy as np
 from InferAnts import ActiveNestmate
 from typing import List, Dict, Any, Tuple
-import config
-import metaconfig
+from .configs.config import config
+from .configs.metaconfig import metaconfig
 
 def initialize_colony(nest_count: int, agent_count_per_nest: int, env_config: Dict[str, Any], ant_config: Dict[str, Any], meta_config: Dict[str, Any]) -> List[List[ActiveNestmate]]:
     colony = [initialize_nest(nest_id, agent_count_per_nest, env_config, ant_config, meta_config) for nest_id in range(nest_count)]

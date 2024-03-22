@@ -75,4 +75,3 @@ META_CONFIG = {
         'THREAT_RESPONSES': ['evacuation', 'defense', 'hide', 'counterattack'],  # Expanded threat responses
     },
 }
-

@@ -8,16 +8,17 @@ class SimulationSummary:
         self.total_agents = len(simulation_results['agents'])  # Store total agents count
 
     def generate_summary(self):
-        summary = {
-            "Total_Agents": self._total_agents(),
-            "Total_Food_Sources": self._total_food_sources(),
-            "Total_Nests": self._total_nests(),
-            "Average_Agent_Energy": self._average_agent_energy(),
-            "Total_Food_Collected": self._total_food_collected(),
-            "Simulation_Steps": self._simulation_steps(),
-            "Energy_Statistics": self._energy_statistics(),
-            "Summary_By_Agent_Type": self._summary_by_agent_type()
-        }
+        summary_methods = [
+            self._total_agents,
+            self._total_food_sources,
+            self._total_nests,
+            self._average_agent_energy,
+            self._total_food_collected,
+            self._simulation_steps,
+            self._energy_statistics,
+            self._summary_by_agent_type
+        ]
+        summary = {method.__name__[1:]: method() for method in summary_methods}
         return summary
 
     def _total_agents(self):
@@ -51,8 +52,7 @@ class SimulationSummary:
         summary = {}
         for agent in self.simulation_results['agents']:
             agent_type = agent.get('type', 'default')
-            if agent_type not in summary:
-                summary[agent_type] = {'energy': [], 'count': 0}
+            summary.setdefault(agent_type, {'energy': [], 'count': 0})
             summary[agent_type]['energy'].append(agent['energy'])
             summary[agent_type]['count'] += 1
         for agent_type, stats in summary.items():

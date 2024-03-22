@@ -1,7 +1,21 @@
 import subprocess
 import sys
 import os
-from typing import Union, List, Dict
+from typing import Union, List, Dict, Any
+
+def execute_command(command: List[str]) -> None:
+    """
+    Executes a given command using subprocess and handles errors.
+    
+    Parameters:
+    - command (List[str]): The command to execute as a list of strings.
+    """
+    try:
+        subprocess.run(command, check=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        error_msg = e.stderr.decode()
+        print(f"Command execution failed with error: {error_msg}", file=sys.stderr)
+        sys.exit(1)
 
 def clone_repo(git_url: str, target_dir: str) -> None:
     """
@@ -15,11 +29,8 @@ def clone_repo(git_url: str, target_dir: str) -> None:
     full_path = os.path.join(target_dir, repo_name)
     clone_command = ["git", "clone", git_url, full_path]
     
-    try:
-        subprocess.run(clone_command, check=True, capture_output=True)
-        print(f"Successfully cloned {git_url} into {full_path}.")
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to clone {git_url}. Error: {e.stderr.decode()}", file=sys.stderr)
+    execute_command(clone_command)
+    print(f"Successfully cloned {git_url} into {full_path}.")
 
 def clone_repos(repo_urls: Union[List[str], Dict[str, str]], target_dir: str = "repos/") -> None:
     """
@@ -39,7 +50,7 @@ def clone_repos(repo_urls: Union[List[str], Dict[str, str]], target_dir: str = "
     for git_url in repo_urls:
         clone_repo(git_url, target_dir)
 
-# Clone custom list of repos
+# Enhanced cloning process with category-based organization
 if __name__ == "__main__":
     repos_to_clone = {
         "ActiveInference": [
@@ -54,7 +65,7 @@ if __name__ == "__main__":
             "https://github.com/4dsolutions/Curriculum_Development"
         ],
         "Ants": [
-            "https://github.com/Social-Insect-Genomics/"
+            "https://github.com/Social-Insect-Genomics/",
             "https://github.com/johnssproul/Insect_REs",
             "https://github.com/pbfrandsen/insect_genome_assemblies",
             "https://github.com/PeterMulhair/DToL_insects",
@@ -67,4 +78,3 @@ if __name__ == "__main__":
     for category, urls in repos_to_clone.items():
         print(f"Cloning {category} repositories...")
         clone_repos(urls, os.path.join(target_dir, category))
-

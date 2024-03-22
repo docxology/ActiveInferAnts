@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -6,24 +5,19 @@ import seaborn as sns
 class SimulationStatistics:
     def __init__(self, simulation_results):
         self.results = simulation_results
-        self.agents_df = pd.DataFrame(simulation_results['agents'])
-        self.food_sources_df = pd.DataFrame(simulation_results['food_sources'])
-        self.nests_df = pd.DataFrame(simulation_results['nests'])
+        self.data_frames = {key: pd.DataFrame(value) for key, value in simulation_results.items()}
 
     def summary_statistics(self):
-        return {
-            'total_agents': len(self.agents_df),
-            'total_food_sources': len(self.food_sources_df),
-            'total_nests': len(self.nests_df),
-            'total_food_collected': self.nests_df['food_collected'].sum(),
-            'simulation_steps': self.results['simulation_steps']
-        }
+        summary = {f'total_{key}': len(df) for key, df in self.data_frames.items() if key in ['agents', 'food_sources', 'nests']}
+        summary['total_food_collected'] = self.data_frames['nests']['food_collected'].sum()
+        summary['simulation_steps'] = self.results['simulation_steps']
+        return summary
 
     def agent_type_statistics(self):
-        return self.agents_df.groupby('type')['energy'].agg(['mean', 'median', 'min', 'max', 'std']).to_dict('index')
+        return self.data_frames['agents'].groupby('type')['energy'].agg(['mean', 'median', 'min', 'max', 'std']).to_dict('index')
 
     def plot_agent_energy_distribution(self, file_path):
-        sns.histplot(self.agents_df['energy'], bins=20, kde=True)
+        sns.histplot(self.data_frames['agents']['energy'], bins=20, kde=True)
         plt.xlabel('Agent Energy')
         plt.ylabel('Count')
         plt.title('Agent Energy Distribution')
