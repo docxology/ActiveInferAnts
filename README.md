@@ -6,9 +6,9 @@ Our mission with ActiveInferAnts is to offer a robust, scalable platform that en
 
 ## Key Features
 
-- Grounded in the theoretical principles of Active Inference and Free Energy Principles.
-- Features a modular and extensible architecture, complete with support for parallel computing.
-- Includes comprehensive ant agent models equipped with sensory inputs, motor functions, and mechanisms for learning and adaptation (at the nestmate & colony levels).
+- Grounded in Active Inference and Free Energy Principle.
+- Features a modular and extensible architecture, complete with support for parallel computing and other features.
+- Includes comprehensive multiscale ant agent models equipped with sensory inputs, motor functions, and mechanisms for learning and adaptation (at the nestmate & colony levels).
 - Offers detailed modeling of niches and environments for realistic nested simulations.
 - Enables analysis of emergent colony behaviors, including foraging, trail formation, and task allocation.
 - Provides validation tools and utilities for empirical data, facilitating mapping simulations to real-world ant species and back.
