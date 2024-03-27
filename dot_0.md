@@ -1,3 +1,6 @@
+This .0 documentis for usage in livestreams and presentations.
+The README.md file contains written information on the project.
+
 # Overview
 - Introduction to the Active InferAnts project.
 - Application of Active Inference and the Free Energy Principle to ant behavior.

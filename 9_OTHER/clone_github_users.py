@@ -59,11 +59,25 @@ class GitHubRepoCloner:
 
 if __name__ == "__main__":
     users_to_clone = {
-        "ActiveInference": ["biaslab", "infer-actively", "ago109", "daphnedemekas", "conorheins", "ChampiB", "zfountas", "alec-tschantz", "schwartenbeckph", "tejparr", "rssmith33"],
-        # More Active Inference: "HMCL-UNIST", "AP6YC", "fabio-deep", "BerenMillidge", "fgregoretti", "cpezzato", "edluyuan","djcrw", "spm", "wmkouw", "tomekkorbak"
-        # "ActiveInferenceInstitute" -- for bringing in examples, educational materials, transcripts, etc. 
-        "Synergetics": ["4dsolutions"],
+
+        # Example: just bringing the work of pymdp (Python language Active INferenc) 
+        "PymdpOnly": ["infer-actively"],
+        
+        # Uncheck the following lists of users, and/or add other users to the lists. 
+        # Thank you for using context & reusing/developing patterns! 
+
+        # Users for Active Inference code
+        # ["biaslab", "infer-actively", "ago109", "daphnedemekas", "conorheins", "ChampiB", "zfountas", "alec-tschantz", "schwartenbeckph", "tejparr", "rssmith33", "HMCL-UNIST", "AP6YC", "fabio-deep", "BerenMillidge", "fgregoretti", "cpezzato", "edluyuan", "djcrw", "spm", "wmkouw", "tomekkorbak", "ActiveInferenceInstitute"]
+        
+        # Users for Synergetics & Quadrays code
+        # "Synergetics": ["4dsolutions"],
+        
+        # Users for Ant and genomics code
         # "Ants": ["Social-Insect-Genomics", "cdanielcadena", "cooplab", "johnssproul", "pbfrandsen", "PeterMulhair", "fohebert", "guillemylla", "guo-cheng"],
+  
+        # Visualization, Statistics, Canvas, Cryptography, Wolfram, Complexity, Physics, cadCAD/BlockScience, Linux, Network, Neuroscience, etc.... 
+  
+        # Users for Agents and autonomous systems code
         #"Agents": ["Anthropic", "OpenAI", "Significant-Gravitas", "yoheinakajima", "TransformerOptimus", "Paitesanshi", "kyrolabs", "lafmdp", "Jenqyang", "e2b-dev", "OpenBMB"]
     }
     
@@ -76,3 +90,4 @@ if __name__ == "__main__":
             if not os.path.exists(user_target_dir):
                 os.makedirs(user_target_dir)
             GitHubRepoCloner.clone_user_repos(username, user_target_dir)
+

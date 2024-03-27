@@ -55,23 +55,25 @@ if __name__ == "__main__":
     repos_to_clone = {
         "ActiveInference": [
             "https://github.com/infer-actively/pymdp",
-        ],
-        "Synergetics": [
-            "https://github.com/4dsolutions/MartianMath",
-            "https://github.com/4dsolutions/m4w",
-            "https://github.com/4dsolutions/python_camp",
-            "https://github.com/4dsolutions/School_of_Tomorrow",
-            "https://github.com/4dsolutions/DigitalMathematics",
-            "https://github.com/4dsolutions/Curriculum_Development"
-        ],
-        "Ants": [
-            "https://github.com/Social-Insect-Genomics/",
-            "https://github.com/johnssproul/Insect_REs",
-            "https://github.com/pbfrandsen/insect_genome_assemblies",
-            "https://github.com/PeterMulhair/DToL_insects",
-            "https://github.com/fohebert/GenomeAnnotation",
-            "https://github.com/guillemylla/Crickets_Genome_Annotation",
         ]
+        
+        # ,
+        # "Synergetics": [
+        #     "https://github.com/4dsolutions/MartianMath",
+        #     "https://github.com/4dsolutions/m4w",
+        #     "https://github.com/4dsolutions/python_camp",
+        #     "https://github.com/4dsolutions/School_of_Tomorrow",
+        #     "https://github.com/4dsolutions/DigitalMathematics",
+        #     "https://github.com/4dsolutions/Curriculum_Development"
+        # ],
+        # "Ants": [
+        #     "https://github.com/Social-Insect-Genomics/",
+        #     "https://github.com/johnssproul/Insect_REs",
+        #     "https://github.com/pbfrandsen/insect_genome_assemblies",
+        #     "https://github.com/PeterMulhair/DToL_insects",
+        #     "https://github.com/fohebert/GenomeAnnotation",
+        #     "https://github.com/guillemylla/Crickets_Genome_Annotation",
+        # ]
     }
     target_dir = input("Enter the target directory (default is 'repos/'): ").strip() or "repos/"
     

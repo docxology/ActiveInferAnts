@@ -4,10 +4,7 @@ from configs import config, metaconfig
 from typing import List, Dict, Any, Union, Callable
 import random
 
-class ThreatLevel:
-    LOW = config.THREAT_LEVELS['LOW']
-    MEDIUM = config.THREAT_LEVELS['MEDIUM']
-    HIGH = config.THREAT_LEVELS['HIGH']
+ThreatLevel = config.THREAT_LEVELS
 
 class CognitiveSecurity:
     """
@@ -24,10 +21,10 @@ class CognitiveSecurity:
         """
         self.colony = colony
         self.threat_levels = config.COLONY['THREAT_LEVELS']
-        self.current_threat_level = ThreatLevel.LOW
+        self.current_threat_level = ThreatLevel['LOW']
         self.threat_assessment_model = self._initialize_threat_assessment_model()
     
-    def _initialize_threat_assessment_model(self) -> Dict[str, Callable[[Any], ThreatLevel]]:
+    def _initialize_threat_assessment_model(self) -> Dict[str, Callable[[Any], str]]:
         """
         Initializes a model for assessing threats based on various parameters such as predator proximity,
         rival colony activities, resource levels, internal colony dynamics, and internal conflicts.
@@ -35,11 +32,11 @@ class CognitiveSecurity:
         :return: A dictionary representing the threat assessment model with callable assessments.
         """
         model = {
-            "predator_proximity": lambda x: ThreatLevel.HIGH if x < metaconfig.PREDATOR_PROXIMITY_THRESHOLD else ThreatLevel.LOW,
-            "rival_colony_activity": lambda x: ThreatLevel.MEDIUM if x > metaconfig.RIVAL_ACTIVITY_THRESHOLD else ThreatLevel.LOW,
-            "resource_levels": lambda x: ThreatLevel.HIGH if x < metaconfig.RESOURCE_CRITICAL else ThreatLevel.MEDIUM if x < metaconfig.RESOURCE_LOW else ThreatLevel.LOW,
-            "colony_health": lambda x: ThreatLevel.HIGH if x < metaconfig.COLONY_HEALTH_CRITICAL else ThreatLevel.MEDIUM if x < metaconfig.COLONY_HEALTH_LOW else ThreatLevel.LOW,
-            "internal_conflicts": lambda x: ThreatLevel.HIGH if x > metaconfig.INTERNAL_CONFLICT_HIGH else ThreatLevel.MEDIUM if x > metaconfig.INTERNAL_CONFLICT_MEDIUM else ThreatLevel.LOW,
+            "predator_proximity": lambda x: "HIGH" if x < metaconfig.PREDATOR_PROXIMITY_THRESHOLD else "LOW",
+            "rival_colony_activity": lambda x: "MEDIUM" if x > metaconfig.RIVAL_ACTIVITY_THRESHOLD else "LOW",
+            "resource_levels": lambda x: "HIGH" if x < metaconfig.RESOURCE_CRITICAL else "MEDIUM" if x < metaconfig.RESOURCE_LOW else "LOW",
+            "colony_health": lambda x: "HIGH" if x < metaconfig.COLONY_HEALTH_CRITICAL else "MEDIUM" if x < metaconfig.COLONY_HEALTH_LOW else "LOW",
+            "internal_conflicts": lambda x: "HIGH" if x > metaconfig.INTERNAL_CONFLICT_HIGH else "MEDIUM" if x > metaconfig.INTERNAL_CONFLICT_MEDIUM else "LOW",
         }
         return model
     
@@ -58,7 +55,7 @@ class CognitiveSecurity:
         }
         
         threat_levels = [self.threat_assessment_model[metric](value) for metric, value in metrics.items()]
-        self.current_threat_level = max(threat_levels, key=lambda level: level.value)
+        self.current_threat_level = max(threat_levels, key=lambda level: ThreatLevel[level])
     
     def execute_security_protocols(self) -> None:
         """
@@ -66,9 +63,9 @@ class CognitiveSecurity:
         resources, activating defense mechanisms, initiating evacuation procedures, or adjusting colony health strategies.
         """
         protocol_actions = {
-            ThreatLevel.HIGH: [self.activate_defense_mechanisms, self.initiate_evacuation_procedures],
-            ThreatLevel.MEDIUM: [self.reallocate_resources, self.increase_surveillance],
-            ThreatLevel.LOW: [self.maintain_routine_operations, self.optimize_resource_allocation]
+            "HIGH": [self.activate_defense_mechanisms, self.initiate_evacuation_procedures],
+            "MEDIUM": [self.reallocate_resources, self.increase_surveillance],
+            "LOW": [self.maintain_routine_operations, self.optimize_resource_allocation]
         }
         actions = protocol_actions.get(self.current_threat_level, [self.default_action])
         for action in actions:
