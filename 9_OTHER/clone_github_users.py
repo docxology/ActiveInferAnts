@@ -60,14 +60,14 @@ class GitHubRepoCloner:
 if __name__ == "__main__":
     users_to_clone = {
 
-        # Example: just bringing the work of pymdp (Python language Active INferenc) 
-        "PymdpOnly": ["infer-actively"],
+        # Example: just bringing the work of Python (pymdp) and Julia (RxInfer) repos.  
+        "ActiveInference": ["biaslab","infer-actively"],
         
-        # Uncheck the following lists of users, and/or add other users to the lists. 
-        # Thank you for using context & reusing/developing patterns! 
+        # Uncheck the following lists of users, and/or edit these lists. 
+        # Thank you for using reusing/developing context & patterns!
 
         # Users for Active Inference code
-        # ["biaslab", "infer-actively", "ago109", "daphnedemekas", "conorheins", "ChampiB", "zfountas", "alec-tschantz", "schwartenbeckph", "tejparr", "rssmith33", "HMCL-UNIST", "AP6YC", "fabio-deep", "BerenMillidge", "fgregoretti", "cpezzato", "edluyuan", "djcrw", "spm", "wmkouw", "tomekkorbak", "ActiveInferenceInstitute"]
+        # ["biaslab", "infer-actively", "ago109", "daphnedemekas", "conorheins", "ChampiB", "zfountas", "alec-tschantz", "schwartenbeckph", "tejparr", "rssmith33", "HMCL-UNIST", "AP6YC", "fabio-deep", "BerenMillidge" , "fgregoretti", "cpezzato", "edluyuan", "djcrw", "spm", "wmkouw", "tomekkorbak", "ActiveInferenceInstitute"]
         
         # Users for Synergetics & Quadrays code
         # "Synergetics": ["4dsolutions"],
